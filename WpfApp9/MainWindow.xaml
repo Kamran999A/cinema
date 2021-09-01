@@ -4,68 +4,92 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp9"
+        xmlns:wpf="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="850" Width="800" WindowStyle="None" Background="Transparent" WindowStartupLocation="CenterScreen" AllowsTransparency="True">
-    <Border Background="White"
+    <Border Background="Black"
         CornerRadius="30,30,5,5"
         >
         <Grid >
-        <Grid.RowDefinitions>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <StackPanel>
+            <StackPanel Margin="0,0,0,78" Grid.RowSpan="2">
 
-            <Label Foreground="Gold" Name="movieLabel" FontSize="26" HorizontalAlignment="Center" >Name of Movie</Label>
+                <Label Foreground="Red" x:Name="movieLabel" FontSize="26" VerticalAlignment="Center"
+                       Width="562" Height="Auto" HorizontalAlignment="Center" Content="Name of Movie" Margin="198,0,40,0" >
+                    <Label.Triggers>
+                        <EventTrigger RoutedEvent="Label.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation
+            Storyboard.TargetName="movieLabel" 
+            Storyboard.TargetProperty="(Label.Width)" 
+           To="1" Duration="0:0:5" 
+            AutoReverse="True" RepeatBehavior="Forever" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Label.Triggers>
+                </Label>
 
-            <Canvas Background="White" Width="800" Height="300" >
-                <Image Canvas.Left="0" Canvas.Top="0" HorizontalAlignment="Center" x:Name="movieImage" Width="800" Height="800" 
+                <Canvas Background="Black" Width="800" Height="300" >
+                    <Image Canvas.Left="0" Canvas.Top="0" HorizontalAlignment="Center" x:Name="movieImage" Width="800" Height="800" 
                    Source="{Binding ImagePath}" Stretch="Fill" >
-                    <Image.Effect>
-                        <BlurEffect Radius="15" KernelType="Gaussian"/>
-                    </Image.Effect>
-                </Image>
-                <Image HorizontalAlignment="Center" Panel.ZIndex="1" x:Name="movieImage2" Width="300" Height="450"
+                        <Image.Effect>
+                            <BlurEffect Radius="15" KernelType="Gaussian"/>
+                        </Image.Effect>
+                    </Image>
+                    <Image HorizontalAlignment="Center" Panel.ZIndex="1" x:Name="movieImage2" Width="300" Height="450"
                    Source="{Binding ImagePath}" Canvas.Left="242" Canvas.Top="66" />
 
 
-                <Border 
-                Opacity="0.5"
+                    <Border 
+                Opacity="0.7"
                 Grid.Column="1" 
                      CornerRadius="12"
                      Background="Gold"
                      Width="58"
                      Height="45"
                      BorderThickness="1"
-                    Name="backbor"
-                    Canvas.Top="667" Canvas.Left="14">
-                    <Button  Content="Back" Name="Backbtn"  Background="Gold" Click="Button_Click_1" 
-                         BorderThickness="0"  Canvas.Top="650" Canvas.Left="14" Margin="9,0,9,4"/>
-                </Border>
-                <Border 
-                Opacity="0.5"
+                    x:Name="backbor"
+                    Canvas.Top="682" Canvas.Left="14">
+                        <Button  Content="Back" x:Name="Backbtn"  Background="Gold" Click="Button_Click_1" 
+                         BorderThickness="0"  Canvas.Top="650" Canvas.Left="14" Margin="8,1"/>
+                    </Border>
+                    <Border 
+                Opacity="0.7"
                 Grid.Column="1" 
                      CornerRadius="12"
                      Background="Gold"
                      Width="58"
                      Height="45"
                      BorderThickness="1"
-                    Name="nextbor"
+                    x:Name="nextbor"
                     
-                    Canvas.Top="667" Canvas.Left="516">
-                    <Button Content="Next" Name="Nextbtn" Background="Gold"   BorderThickness="0" Click="Button_Click_2" Canvas.Top="650" Canvas.Left="516" Margin="9,8,9,9"/>
+                    Canvas.Top="682" Canvas.Left="516">
+                        <Button Content="Next" x:Name="Nextbtn"
+                            Background="Gold"   BorderThickness="0" Click="Button_Click_2" Canvas.Top="650" Canvas.Left="516" Margin="8,1"/>
+                    </Border>
+                </Canvas>
+                <Border
+                    Background="Transparent"
+                            Margin="88,240,304,2"
+                            x:Name="Border" Height="178">
+                    <wpf:ChromiumWebBrowser x:Name="ChromiumBrowser" Margin="3,0"/>
                 </Border>
-            </Canvas>
-        </StackPanel>
-        <Grid Grid.Row="1">
+            </StackPanel>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*" />
-                <ColumnDefinition Width="2*" />
-            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" Margin="0,48,0,0">
 
-            <TextBox
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="5*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+
+                <TextBox
             x:Name="movieTextbox"
             FontSize="26"
             Text=" Name of Movie"
@@ -74,29 +98,27 @@
                 Opacity="0.3"
             >
 
-            </TextBox>
-            <Border 
-                Opacity="0.5"
+                </TextBox>
+                <Border 
+                Opacity="0.7"
                 Grid.Column="1" 
                      CornerRadius="12"
                      Background="Gold"
-                     Width="130"
-                     Height="110"
-                     BorderThickness="1"
+                     BorderThickness="0.2" Margin="10,4,10,6"
                      >
-                <Button
+                    <Button
             Content="Search"
            BorderThickness="0"
             FontSize="26"
             Background="Gold"
             Click="Button_Click"
-                    Margin="9"
+                    Margin="6,5,7,7"
             ></Button>
-            </Border>
+                </Border>
+
+            </Grid>
 
         </Grid>
-
-    </Grid>
 
     </Border>
 </Window>
